@@ -14,11 +14,11 @@
 	"type": "screamer",
 	"params": {
 		"video": {
-			"path": "video.webm",
+			"path": "media/video.webm",
 			"hideEnd": true
 		},
 		"sound": {
-			"path": "audio.mp3"
+			"path": "media/audio.mp3"
 		}
 	},
 	"settings": {
