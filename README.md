@@ -1,4 +1,4 @@
-# StreamKit Effect Template
+# StreamKit Effect Simple Template
 
 This repository is a template for creating a custom screen effect for the RocketMan StreamKit application. The built output is loaded by the main application into an iframe when the effect is triggered.
 

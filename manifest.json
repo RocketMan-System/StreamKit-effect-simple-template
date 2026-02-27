@@ -1,16 +1,29 @@
 {
-    "name": {
-        "en": "StreamKit Effect Template",
-        "ru": "Шаблон эффекта для StreamKit",
-        "ua": "Шаблон ефекту для StreamKit"
-    },
-    "author": "RocketMan",
-    "version": "1.0.0",
-    "type": "effect",
-    "permissions": ["effectData"],
-    "settings": {
-        "maxSeconds": 120,
-        "volume": 70,
-        "defaultSeconds": 30
-    }
+	"name": {
+		"en": "StreamKit Effect Simple Template",
+		"ru": "Шаблон простого эффекта для StreamKit",
+		"ua": "Шаблон простого ефекту для StreamKit"
+	},
+	"description": {
+		"en": "StreamKit Effect Simple Template",
+		"ru": "Шаблон простого эффекта для StreamKit",
+		"ua": "Шаблон простого ефекту для StreamKit"
+	},
+	"author": "RocketMan",
+	"version": "1.0.0",
+	"type": "screamer",
+	"params": {
+		"video": {
+			"path": "video.webm",
+			"hideEnd": true
+		},
+		"sound": {
+			"path": "audio.mp3"
+		}
+	},
+	"settings": {
+		"lockSeconds": 3,
+		"volume": 70,
+		"defaultSeconds": 30
+	}
 }
