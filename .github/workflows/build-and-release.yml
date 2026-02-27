@@ -1,11 +1,9 @@
-name: Build and Release
+name: Build and Release (Static)
 
 on:
   push:
     branches:
-        - main
-  pull_request:
-    branches: [main]
+      - main
   workflow_dispatch:
 
 permissions:
@@ -13,24 +11,18 @@ permissions:
 
 jobs:
   build-and-release:
-    
-    runs-on: 'ubuntu-latest'
+    runs-on: ubuntu-latest
 
     steps:
       - name: 🛒 Checkout repository
         uses: actions/checkout@v3
 
-      - name: 🟢 Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '22'
-
       - name: 🏷️ Get version from manifest.json
         id: get_version
         shell: bash
         run: |
-          version=$(node -p "require('./manifest.json').version")
-          echo "version=$version" >> $GITHUB_OUTPUT
+          VERSION=$(jq -r .version manifest.json)
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
 
       - name: 🔍 Check if release exists
         id: check_release
@@ -45,24 +37,17 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: 📦 Install dependencies
+      - name: 📦 Prepare main.zip
         if: steps.check_release.outputs.exists == 'false'
-        run: npm ci
-
-      - name: 🏗️ Build Project
-        if: steps.check_release.outputs.exists == 'false'
-        run: npm run build
-
-      - name: 📂 Copy file to subfolder
         run: |
-          cp manifest.json dist/
-          cp logo.* dist/
+          mkdir build
+          cp manifest.json build/
+          cp logo.* build/ 2>/dev/null || true
+          cp -r media build/ 2>/dev/null || true
 
-      - name: 📦 Zip dist folder
-        run: |
-          cd dist
+          cd build
           zip -r ../main.zip .
-          
+
       - name: 📤 Create Release
         if: steps.check_release.outputs.exists == 'false'
         uses: softprops/action-gh-release@v1
